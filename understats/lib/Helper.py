@@ -7,7 +7,7 @@ class Utils:
     def find_ind_end(self, arg):
         return arg.index("')")
     
-    def generateData(self, arg):
+    def extractDataFromScript(self, arg):
         data_json = arg.strip()
         ind_start = self.find_ind_start(data_json)
         ind_end =   self.find_ind_end(data_json)
@@ -17,7 +17,7 @@ class Utils:
     def get_PTS(self, obj):
         return obj['PTS']
     
-    def getAllTeamsName(self, data, filter):
+    def getStatsDataForLeague(self, data, filter):
         temp = []
         index = 1
         for id in data.keys():
@@ -32,6 +32,7 @@ class Utils:
             xPTS = 0
             npxG = 0
             npxGA = 0
+            npxGD = 0
             xG_diff = 0
             xGA_diff = 0
             xPTS_diff = 0
@@ -50,6 +51,7 @@ class Utils:
                 xPTS += histo['xpts']
                 npxG += histo['npxG']
                 npxGA += histo['npxGA']
+                npxGD += histo['npxGD']
                 xG_diff += histo['xG'] - histo['scored']
                 xGA_diff += histo['xGA'] - histo['missed']
                 xPTS_diff += histo['xpts'] - histo['pts']
@@ -69,7 +71,8 @@ class Utils:
                    'xGA_diff' : xGA_diff,
                    'npxGA' : npxGA,
                    'xPTS' : xPTS,
-                   'xPTS_diff' : xPTS_diff 
+                   'xPTS_diff' : xPTS_diff,
+                   'npxGD' : npxGD
                    }
             temp.append(team)
             index += 1

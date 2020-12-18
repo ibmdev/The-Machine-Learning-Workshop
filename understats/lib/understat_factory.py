@@ -16,13 +16,13 @@ class UnderStatService:
         # Affichage de la liste des scripts
         for script in scripts:
             if 'teamsData' in script.text:
-                teams_data = helper.generateData(script.text)
-                infos['teams'] = helper.getAllTeamsName(ast.literal_eval(helper.generateData(script.text)), filter)
+                teams_data = helper.extractDataFromScript(script.text)
+                infos['teams'] = helper.getStatsDataForLeague(ast.literal_eval(teams_data), filter)
                 infos['allteams'] = teams_data
             if 'playersData' in script.text:
-                infos['players'] = helper.generateData(script.text)
+                infos['players'] = helper.extractDataFromScript(script.text)
             if 'datesData' in script.text:
-                infos['dates'] = helper.generateData(script.text)
+                infos['dates'] = helper.extractDataFromScript(script.text)
 
         return infos
        
