@@ -57,6 +57,7 @@ class Utils:
                 xPTS_diff += histo['xpts'] - histo['pts']
             team = {
                    'Team' : data[id]['title'],
+                   'id': id,
                    'M': len(histories),
                    'W': W,
                    'D' : D,
@@ -72,7 +73,9 @@ class Utils:
                    'npxGA' : npxGA,
                    'xPTS' : xPTS,
                    'xPTS_diff' : xPTS_diff,
-                   'npxGD' : npxGD
+                   'npxGD' : npxGD,
+                   'stats' : {},
+                   'histo': {} 
                    }
             temp.append(team)
             index += 1
