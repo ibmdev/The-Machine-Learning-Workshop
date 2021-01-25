@@ -13,6 +13,11 @@ class UnderStatService:
         globalInfos = []
         filter = {'type': ''}
         present = datetime.now()
+        # Chargement du dictionnaire de mise en correspondance des données de football-data.co.uk
+        dictdata = []
+        if path.exists('datacouk.json'):
+            with open('datacouk.json') as json_dict:
+                dictdata = json.load(json_dict)       
         for league in understat_constants.leagues:
             # Chargement des données de la league depuis football-data.co.uk
             fdata = []
@@ -58,7 +63,7 @@ class UnderStatService:
                 team['histo'] = histoTeams
                 team['players'] = playersData
                 if len(fdata) > 0:
-                    team['results'] = self.getResultsFromFootballDataCoUk(fdata,team['Team'])
+                    team['results'] = self.getResultsFromFootballDataCoUk(fdata,dictdata[league],team['Team'])
                 statsLeague.append(team);
                 
             leagueInfos['stats'] = statsLeague
@@ -80,17 +85,21 @@ class UnderStatService:
                 json.dump(globalInfos, outfile)
     
     # Team : Récupération des données des matchs passées d'une équipe depuis football-data.co.uk
-    def getResultsFromFootballDataCoUk(self, datacouk, team):
+    def getResultsFromFootballDataCoUk(self, datacouk,dictdata,team):
         results = []
         for data in datacouk:
-            result = {'time': data['Date'], 'h': data['HomeTeam'].replace(' ','_'), 'a': data['AwayTeam'].replace(' ','_'), 'HTR': 
+            hometeam = self.findByKey(dictdata, data['HomeTeam'])
+            awayteam = self.findByKey(dictdata, data['AwayTeam'])
+            result = {'time': data['Date'], 'h': hometeam.replace(' ','_'), 'a': awayteam.replace(' ','_'), 'HTR': 
                      data['HTR'], 'FTR': data['FTR'],'HTHG': data['HTHG'], 'HTAG': data['HTAG'], 'FTHG': data['FTHG'], 'FTAG': 
-                     data['FTAG'], 'B365H': data['B365H'],'B365D': data['B365D'],'B365A': data['B365A'], 'B365>2.5': data['B365>2.5'], 
-                     'B365<2.5': data['B365<2.5'] }
-            if data['HomeTeam'].replace(' ','_') == team:
+                     data['FTAG'], 'HS': data['HS'], 'AS': data['AS'], 'HST': data['HST'], 'AST': data['AST'], 'HC': data['HC'], 
+                     'AC': data['AC'], 'HF': data['HF'], 'AF': data['AF'], 'HY': data['HY'], 'AY': data['AY'], 'HR': data['HR'],
+                     'AR': data['AR'], 'B365H': data['B365H'],'B365D': data['B365D'],'B365A': data['B365A'],
+                      'B365>2.5': data['B365>2.5'], 'B365<2.5': data['B365<2.5'] }
+            if hometeam.replace(' ','_') == team:
                 result['side'] = 'h'
                 results.append(result)
-            if data['AwayTeam'].replace(' ','_') == team:
+            if awayteam.replace(' ','_') == team:
                 result['side'] = 'a'
                 results.append(result)
         return results 
@@ -172,5 +181,10 @@ class UnderStatService:
             team['Team'] = team['Team'].replace(' ','_')
             teamsName.append(team)
         return teamsName
-            
+    def findByKey(self, arr , key):
+        valueKey = key
+        for x in arr:
+            if x["key"] == key:
+                valueKey = x['value']
+        return valueKey
     

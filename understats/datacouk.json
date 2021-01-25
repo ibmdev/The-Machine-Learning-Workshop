@@ -1,0 +1,37 @@
+	{
+		"EPL": [
+				{"key": "Man United", "value": "Manchester United"},
+				{"key": "Newcastle", "value": "Newcastle United"},
+				{"key": "West Brom", "value": "West Bromwich Albion"},
+				{"key": "Wolves", "value": "Wolverhampton Wanderers"},
+				{"key": "Man City", "value": "Manchester City"}
+			],
+		"Bundesliga": [
+				{"key": "Mainz", "value": "Mainz 05"},
+				{"key": "Dortmund", "value": "Borussia Dortmund"},
+				{"key": "Ein Frankfurt", "value": "Eintracht Frankfurt"},
+				{"key": "Leverkusen", "value": "Bayer Leverkusen"},
+				{"key": "Hertha", "value": "Hertha Berlin"},
+				{"key": "FC Koln", "value": "FC Cologne"},
+				{"key": "Bielefeld", "value": "Arminia Bielefeld"},
+				{"key": "M'gladbach", "value": "Borussia M.Gladbach"},
+				{"key": "Stuttgart", "value": "VfB Stuttgart"},
+				{"key": "RB Leipzig", "value": "RasenBallsport Leipzig"}
+			],
+		"La_liga": [
+				{"key": "Ath Madrid", "value": "Atletico Madrid"},
+				{"key": "Ath Bilbao", "value": "Athletic Club"},
+				{"key": "Betis", "value": "Real Betis"},
+				{"key": "Valladolid", "value": "Real Valladolid"},
+				{"key": "Huesca", "value": "SD Huesca"},
+				{"key": "Celta", "value": "Celta Vigo"},
+				{"key": "Sociedad", "value": "Real Sociedad"}
+			],
+		"Serie_A": [
+				{"key": "Parma", "value": "Parma Calcio 1913"}
+			],
+		"Ligue_1": [
+				{"key": "Paris SG", "value": "Paris Saint Germain"},
+				{"key": "St Etienne", "value": "Saint-Etienne"}
+			]
+	}
